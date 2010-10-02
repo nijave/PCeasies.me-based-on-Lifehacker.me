@@ -53,7 +53,7 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 
 /*** FACEBOOK ***/
 
-
+$i = 0;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
@@ -62,8 +62,8 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 	<title><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name']);} ?> <? if (isset($general['last_name']) && $general['last_name'] != '') {echo strtolower($general['last_name']);} ?></title>
 	<meta http-equiv="Content-category" content="text/html; charset=ISO-8859-1" />
 	<link href="css/splash.css" rel="stylesheet" category="text/css" />
-    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" /> 
-	<link rel="SHORTCUT ICON" href="/favicon.ico" />
+    <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" /> 
+	<link rel="SHORTCUT ICON" href="favicon.ico" />
 	<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
 	<? if (isset($accounts['flickr']['username']) && isset($accounts['flickr']['apikey']) && $accounts['flickr']['apikey'] != '' && $accounts['flickr']['username'] != '')
 	{
@@ -81,8 +81,18 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 	{
 	?>
 	<script type="text/javascript" charset="utf-8">
+		var elementsArray = new Array();
+		var nav_items;
 		$(document).ready(function(){
 			$("a[rel^='prettyPhoto']").prettyPhoto();
+			elementsArray = $('.content_bubble');
+			nav_items = $('#elements ol li').length;
+			// You can now specify a page in the uri to go to it first - pceasies.me/?photos
+			page = location.href.split('?')[1];
+			if(page && page.length > 3) {
+				switchto(page, 0)
+			};
+
 		});
 	</script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
@@ -121,10 +131,12 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 		</h1>
 		<div id="elements">
 			<ol>
-				<li><a href="javascript:switchto('about');" id="nav_about">about</a></li>
-				<? if ($flickr_on == true) { ?><li><a href="javascript:switchto('photos');" id="nav_photos">photos</a></li><? } ?>
-				<? if ($video_bubble == true) { ?><li><a href="javascript:switchto('videos');" id="nav_videos">videos</a></li><? } ?>
-				<? if ($twitter_on == true) { ?><li><a href="javascript:switchto('twitter');" id="nav_twitter">twitter</a></li><? } ?>
+				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
+					The arrow is always lined up (few px off) no matter which modules are active -->
+				<li><a href="javascript:switchto('about', <? echo $i++; ?>);" id="nav_about">about</a></li>
+				<? if ($flickr_on == true) { ?><li><a href="javascript:switchto('photos', <? echo $i++; ?>);" id="nav_photos">photos</a></li><? } ?>
+				<? if ($video_bubble == true) { ?><li><a href="javascript:switchto('videos', <? echo $i++; ?>);" id="nav_videos">videos</a></li><? } ?>
+				<? if ($twitter_on == true) { ?><li><a href="javascript:switchto('twitter', <? echo $i++; ?>);" id="nav_twitter">twitter</a></li><? } ?>
 			</ol>
 		</div>
 	</div>
@@ -138,9 +150,9 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 		<p><?=$general['about_me']; ?></p>
 	</div>
 	
+	<? if ($flickr_on == true) { ?> <!-- Flickr true/false check added outside of div some the 'photos' line and an empty div won't show up when disabled -->
 	<div id="photos" class="content_bubble">
 		<h3><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name'])."'s ";} ?>photos</h3>
-		<? if ($flickr_on == true) { ?>
 		<p>
 			<div id="galleria">Loading...</div> 
 			<script>
@@ -162,8 +174,9 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 		<p id="more">
 			<a href="http://flickr.com/photos/<?=$accounts['flickr']['username'] ?>">More...</a>
 		</p>
-		<? } ?>
+		
 	</div>
+	<? } ?>
 	
 	<div id="videos" class="content_bubble">
 		<? if ($video_bubble == true) { ?>
@@ -221,7 +234,7 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 				<?
 				foreach ($twitter_simple_xml->status as $tweet)
 				{
-					echo '<p class="tweet"><img src="'.$tweet->user->profile_image_url.'" style="float: left; margin: 0 8px 8px 0;" />'.$tweet->text.'<br /><span style="font-size: 10px; font-style: italic;">'.$tweet->created_at.'</span></p><hr />';
+					echo '<p class="tweet"><img src="'.$tweet->user->profile_image_url.'" style="float: left; margin: 0 8px 8px 0;" height="60" width="60" />'.$tweet->text.'<br /><span style="font-size: 10px; font-style: italic;">'.$tweet->created_at.'</span></p><hr />';
 				}
 				?>
 				<p id="more">
