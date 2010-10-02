@@ -1,26 +1,14 @@
-function switchto(elem)
+
+function switchto(elem, num)
 {
-	document.getElementById('about').style.display = document.getElementById('photos').style.display = document.getElementById('videos').style.display = document.getElementById('twitter').style.display = 'none';
-	document.getElementById(elem).style.display = 'inline';
-	if (elem == 'about')
-	{
-		triangle_margin = '10px 54px 0 0';
-	}
-	else if (elem == 'photos')
-	{
-		triangle_margin = '10px 164px 0 0';
-	}
-	else if (elem == 'videos')
-	{
-		triangle_margin = '10px 276px 0 0';
-	}
-	else if (elem == 'twitter')
-	{
-		triangle_margin = '10px 389px 0 0';
-	}
-	else
-	{
-		triangle_margin = '10px 54px 0 0';
-	}
-	document.getElementById('triangle').style.margin = triangle_margin;
+	// Use cached object so you don't have to keep researching dom -- performance
+	// Make use of included jQuery
+	$(elementsArray).hide(1);
+	$('#'+elem).fadeIn('slow');
+	
+	// Determine where to move triangle arrow based on num parameter and padding, width, and margin values -- might still be a few px off
+	triangle_margin = (52 + (num*116));
+
+	// Move the triangle over using jQuery animate feature
+	$('#triangle').stop().animate({marginRight: triangle_margin}, 750);
 }

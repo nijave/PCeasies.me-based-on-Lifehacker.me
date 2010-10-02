@@ -2,7 +2,7 @@
 
 /*** VISUAL STYLE ***/
 $visual_style['background_image'] = ''; // Enter any full URL to a photo to use it as your background photo
-$visual_style['navigation_shadows'] = false; // Add shadows to your name and the navigation elements to make them easier to read on complex background images
+$visual_style['navigation_shadows'] = true; // Add shadows to your name and the navigation elements to make them easier to read on complex background images
 $visual_style['navigation_color'] = '#FFFFFF'; // Set this to any HEX color value to change the color of your name and navigation
 
 /*** ABOUT ME ***/

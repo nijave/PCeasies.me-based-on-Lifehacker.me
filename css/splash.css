@@ -4,25 +4,24 @@
 {
 	font-family: 'HelveticaNeueRegular';
 	src: url('../fonts/HelveticaNeue.eot');
-	src: local('Helvetica Neue Bold'), local('HelveticaNeue'), url('HelveticaNeue.woff') format('woff'), url('HelveticaNeue.ttf') format('truetype');
+	src: local('Helvetica Neue Bold'), local('HelveticaNeue'), url('HelveticaNeue.woff') format('woff'), url('../fonts/HelveticaNeue.ttf') format('truetype');
 }
 
 @font-face
 {
 	font-family: 'HelveticaNeueCondensedBold';
 	src: url('../fonts/HelveticaNeue-CondensedBold.eot');
-	src: local('HelveticaNeue-CondensedBold'), local('HelveticaNeue-CondensedBold'), url('HelveticaNeue-CondensedBold.woff') format('woff'), url('HelveticaNeue-CondensedBold.ttf') format('truetype');
+	src: local('HelveticaNeue-CondensedBold'), local('HelveticaNeue-CondensedBold'), url('HelveticaNeue-CondensedBold.woff') format('woff'), url('../fonts/HelveticaNeue-CondensedBold.ttf') format('truetype');
 }
 
 body
 {
 	margin: 24px 8px 8px 8px;
-	background-color: #36ACF7;
+	background-color: #CD0000;
 	background-image: url('../img/bg_generic_blue.jpg');
 	background-attachment: fixed;
 	background-repeat: none;
 	background-position: left top;
-	
 	font-family: 'HelveticaNeueRegular';
 }
 
@@ -42,31 +41,43 @@ div#nav #elements
 {
 	margin-right: 20px;
 }
+div#nav ol {
+	height:12px;
+	margin:24px 0 0 0;
+}
 div#nav li
 {
 	list-style: none;
 	float: right;
+	width:66px;
 	margin: 0 24px 0 24px;
 	font-family: 'HelveticaNeueCondensedBold';
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
+	transform: scale(1); /* Future compatibility */
 }
-div#nav li:hover
+div#nav a:hover
 {
 	color: #FFFFFF;
-	-moz-border-radius: 18px;
-	-webkit-border-radius: 18px;
-	border-radius: 18px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	background: #000000;
-	background: -webkit-gradient(linear, 80% 20%, 80% 100%, from(#000000), to(#555555));
-	padding: 6px 12px 6px 12px;
-	-webkit-transform: scale(1.325);
-	-moz-transform: scale(1.325);
-	-o-transform: scale(1.325);
+	padding:4px 10px;
+	-webkit-transition: All 0.3034s ease;
+	-moz-transition: All 0.3034s ease;
+	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
+	opacity: .75; /* Standard: FF gt 1.5, Opera, Safari */
+	filter: alpha(opacity=75); /* IE lt 8 */
+	-ms-filter: "alpha(opacity=75)"; /* IE 8 */
+	-khtml-opacity: .75; /* Safari 1.x */
+	-moz-opacity: .75; /* FF lt 1.5, Netscape */
 }
 div#nav a
 {
@@ -91,10 +102,12 @@ div#triangle
 	clear: right;
 	text-align: right;
 	padding: 0;
-	margin: 10px 54px 0 0;
+	margin: 6px 54px 0 0;
+	/* Handled by jQuery now
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 }
 .content_bubble
 {
@@ -170,15 +183,18 @@ div#twitter
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
+	transform: scale(1); /* Future compatibility */
 }
 .galleria-thumbnails:hover .galleria-image:hover
 {
 	-webkit-transform: scale(1.15);
 	-moz-transform: scale(1.15);
 	-o-transform: scale(1.15);
+	transform: scale(1.15); /* Future compatibility */
 }
 div#flickr_photos img
 {
@@ -189,15 +205,18 @@ div#flickr_photos img
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
+	transform: scale(1); /* Future compatibility */
 }
 div#flickr_photos img:hover
 {
 	-webkit-transform: scale(1.15);
 	-moz-transform: scale(1.15);
 	-o-transform: scale(1.15);
+	transform: scale(1.15); /* Future compatibility */
 }
 
 /* CONTENT VIDEOS */
@@ -210,15 +229,18 @@ div#vimeo_videos img
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
+	transform: scale(1); /* Future compatibility */
 }
 div#vimeo_videos img:hover
 {
 	-webkit-transform: scale(1.25);
 	-moz-transform: scale(1.25);
 	-o-transform: scale(1.25);
+	transform: scale(1.25); /* Future compatibility */
 }
 div#youtube_videos img
 {
@@ -229,15 +251,18 @@ div#youtube_videos img
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
+	transform: scale(1); /* Future compatibility */
 }
 div#youtube_videos img:hover
 {
 	-webkit-transform: scale(1.25);
 	-moz-transform: scale(1.25);
 	-o-transform: scale(1.25);
+	transform: scale(1.25); /* Future compatibility */
 }
 
 /* CONTENT TWITTER */
@@ -257,9 +282,11 @@ div#twitter_feed hr
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
+	transition: All 0.3034s ease; /* Future compatibility */
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
+	transform: scale(1); /* Future compatibility */
 }
 .tweet:hover
 {
@@ -275,11 +302,13 @@ div#twitter_feed hr
 	-webkit-transform: scale(1.25);
 	-moz-transform: scale(1.25);
 	-o-transform: scale(1.25);
+	transform: scale(1.25); /* Future compatibility */
 }
 
 /*** FOOTER ***/
 div#footer
 {
+	display: none;
 	float: right;
 	clear: both;
 	margin: 48px 48px 0 0;
