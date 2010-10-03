@@ -13,13 +13,6 @@ function curl_get($url)
 	return $return;
 }
 
-/*** FLICKR ***/
-// The Flickr gallery is handled through an open-source, free JavaScript called Galleria.  For more information on the license, etc., check out the docs folder in this package.
-if (isset($accounts['flickr']['username']) && isset($accounts['flickr']['apikey']) && $accounts['flickr']['apikey'] != '' && $accounts['flickr']['username'] != '')
-{ 
-	$flickr_on = true;
-}
-
 /*** VIMEO ***/
 if (isset($accounts['vimeo']['username']) && $accounts['vimeo']['username'] != '')
 {
@@ -37,9 +30,6 @@ if (isset($accounts['youtube']['username']) && $accounts['youtube']['username'] 
 	$youtube_on = true;
 	$youtube_rss_feed = 'http://gdata.youtube.com/feeds/api/users/'.$accounts['youtube']['username'].'/uploads?v=2';
 	$youtube_simple_xml = simplexml_load_file($youtube_rss_feed);
-	/*echo '<pre>';
-	print_r($youtube_simple_xml);
-	echo '</pre>';*/
 }
 
 /*** TWITTER ***/
@@ -65,17 +55,6 @@ $i = 0;
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" /> 
 	<link rel="SHORTCUT ICON" href="favicon.ico" />
 	<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
-	<? if (isset($accounts['flickr']['username']) && isset($accounts['flickr']['apikey']) && $accounts['flickr']['apikey'] != '' && $accounts['flickr']['username'] != '')
-	{
-	?>
-	
-	<script type="text/javascript" src="js/galleria.js"></script>
-	<script type="text/javascript" src="js/plugins/galleria.flickr.js"></script> 
-	<script>
-	    // Load theme
-	    Galleria.loadTheme('js/themes/lightbox/galleria.lightbox.js');
-	</script>
-	<? } ?>
 	
 	<? if (isset($accounts['vimeo']['username']) || isset($accounts['youtube']['username']))
 	{
@@ -92,7 +71,14 @@ $i = 0;
 			if(page && page.length > 3) {
 				switchto(page, 0)
 			};
-
+			document.getElementById("pictures").style.display = 'none';
+			$("a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:true});
+		});
+		$(window).load(function() {
+		console.log('window loaded');
+			$('#loading-pics').fadeOut('fast', function() {
+				$('#pictures').fadeIn(2000);
+			}).html('');
 		});
 	</script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
@@ -134,9 +120,9 @@ $i = 0;
 				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
 					The arrow is always lined up (few px off) no matter which modules are active -->
 				<li><a href="javascript:switchto('about', <? echo $i++; ?>);" id="nav_about">about</a></li>
-				<? if ($flickr_on == true) { ?><li><a href="javascript:switchto('photos', <? echo $i++; ?>);" id="nav_photos">photos</a></li><? } ?>
-				<? if ($video_bubble == true) { ?><li><a href="javascript:switchto('videos', <? echo $i++; ?>);" id="nav_videos">videos</a></li><? } ?>
-				<? if ($twitter_on == true) { ?><li><a href="javascript:switchto('twitter', <? echo $i++; ?>);" id="nav_twitter">twitter</a></li><? } ?>
+				<? if ($images) { ?><li><a href="javascript:switchto('photos', <? echo $i++; ?>);" id="nav_photos">photos</a></li><? } ?>
+				<? if ($videos) { ?><li><a href="javascript:switchto('videos', <? echo $i++; ?>);" id="nav_videos">videos</a></li><? } ?>
+				<? if ($twitter) { ?><li><a href="javascript:switchto('twitter', <? echo $i++; ?>);" id="nav_twitter">twitter</a></li><? } ?>
 			</ol>
 		</div>
 	</div>
@@ -150,36 +136,46 @@ $i = 0;
 		<p><?=$general['about_me']; ?></p>
 	</div>
 	
-	<? if ($flickr_on == true) { ?> <!-- Flickr true/false check added outside of div some the 'photos' line and an empty div won't show up when disabled -->
+	<? if ($images) { ?> <!-- Images true/false check added outside of div some the 'photos' line and an empty div won't show up when disabled -->
 	<div id="photos" class="content_bubble">
 		<h3><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name'])."'s ";} ?>photos</h3>
-		<p>
-			<div id="galleria">Loading...</div> 
-			<script>
-                // Flickr init
-                var api_key = <?='\''.$accounts['flickr']['apikey'].'\'' ?>;
-                var flickr = new Galleria.Flickr(api_key);
-                // Get my photostream
-                flickr.setOptions({
-                    size: 'large', max: 25, sort: 'date-posted-desc'
-                }).getUser('<?=$accounts['flickr']['username'] ?>', function(data) {
-                    $('#galleria').galleria({
-                        data_source: data,
-                        debug: true
-                    });
-                });
-				document.getElementById('photos').style.display = 'none';
-            </script>
-		</p>	
+		<div id="loading-pics"><img src="images/loading.gif"></div>
+		<div id="pictures">
+		<?php
+		if($images) {
+			if($accounts['flickr']['username'] !== '') {
+				require_once('helpers/flickr.php');
+				$accounts['flickr']['username'] = getID($accounts['flickr']['username']); // This turns the username into an id if it isn't one
+				$flickr_images = getPhotos($accounts['flickr']['username'], 25);
+				foreach($flickr_images as $item) {
+					echo '<a href="'.$item['url'].'" rel="prettyPhoto[flickr]"><img src="'.$item['url'].'" class="image-thumb" name="'.$item['title'].'" alt="<a href=\''.$item['link'].'\'>'.$item['title'].'</a>"></a>';
+				}
+			}
+			if($accounts['flickr']['username'] !== '' && $accounts['picasa']['username'] !== '') {
+				echo '<hr>';
+			}
+			if($accounts['picasa']['username'] !== '') {
+				require_once('helpers/picasa.php');
+				$picasa_images = getPicasaPhotos($accounts['picasa']['username'], 25);
+				foreach($picasa_images as $item) {
+					echo '<a href="'.$item['url'].'" rel="prettyPhoto[picasa]"><img src="'.$item['url'].'" class="image-thumb" name="'.$item['title'].'" alt="<a href=\''.$item['link'].'\'>'.$item['title'].'</a>"></a>';
+				}
+			}
+		}
+		?>
+		</div>	
 		<p id="more">
-			<a href="http://flickr.com/photos/<?=$accounts['flickr']['username'] ?>">More...</a>
+		<?php
+			if($accounts['flickr']['username'] !== '') echo '<a href="http://flickr.com/photos/'.$accounts["flickr"]["username"].'">Flickr...</a><br>';
+			if($accounts['picasa']['username'] !== '') echo '<a href="http://picasaweb.google.com/'.$accounts["picasa"]["username"].'">Picasa...</a>';
+		?>
 		</p>
 		
 	</div>
 	<? } ?>
 	
 	<div id="videos" class="content_bubble">
-		<? if ($video_bubble == true) { ?>
+		<? if ($videos) { ?>
 		<h3><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name'])."'s ";} ?>videos</h3>
 		<?
 		if (isset($general['about_videos']) && $general['about_videos'] != '')
@@ -188,7 +184,7 @@ $i = 0;
 		}
 		?>
 		<p>
-			<? if ($vimeo_on == true) { ?>
+			<? if ($accounts['vimeo']['username'] !== '') { ?>
 			<!-- Vimeo -->
 			<div id="vimeo_videos">
 				<?php foreach ($vimeo_videos->video as $video): ?>
@@ -197,7 +193,7 @@ $i = 0;
 			</div>
 			<? } ?>
 			
-			<? if ($youtube_on == true) { ?>
+			<? if ($accounts['youtube']['username'] !== '') { ?>
 			<!-- YouTube -->
 			<div id="youtube_videos">
 				<?
@@ -230,7 +226,7 @@ $i = 0;
 
 		<p>
 			<div id ="twitter_feed">
-				<? if ($twitter_on == true) { ?>
+				<? if ($twitter) { ?>
 				<?
 				foreach ($twitter_simple_xml->status as $tweet)
 				{

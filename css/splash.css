@@ -154,7 +154,10 @@ div#about
 }
 div#photos
 {
-	display: inline;
+	display: none;
+}
+div#photos > h3 {
+	padding-bottom:10px;
 }
 div#videos
 {
@@ -166,59 +169,22 @@ div#twitter
 }
 
 /* CONTENT PHOTOS */
-.galleria-thumbnails
-{
-	overflow:hidden;
+div#photos .image-thumb {
+	height:90px;
+	width:90px;
+	padding:4px;
 }
-.galleria-thumbnails .galleria-image
-{
-	width: 120px;
-	height: 90px;
-	float: left;
-	cursor: pointer;
-	margin: 8px;
-	-moz-box-shadow: 0px 0px 7px #888;
-	-webkit-box-shadow: 0px 0px 7px #888;
-	box-shadow: 0px 0px 7px #888;
-	-webkit-transition: All 0.3034s ease;
-	-moz-transition: All 0.3034s ease;
-	-o-transition: All 0.3034s ease;
-	transition: All 0.3034s ease; /* Future compatibility */
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	-o-transform: scale(1);
-	transform: scale(1); /* Future compatibility */
+div#photos #loading-pics {
+	padding:15px;
+	text-align:center;
+	width:auto;
 }
-.galleria-thumbnails:hover .galleria-image:hover
-{
-	-webkit-transform: scale(1.15);
-	-moz-transform: scale(1.15);
-	-o-transform: scale(1.15);
-	transform: scale(1.15); /* Future compatibility */
+.ppt > a:link, a:visited {
+	color:#fff;
 }
-div#flickr_photos img
-{
-	margin: 8px;
-	-moz-box-shadow: 0px 0px 7px #888;
-	-webkit-box-shadow: 0px 0px 7px #888;
-	box-shadow: 0px 0px 7px #888;
-	-webkit-transition: All 0.3034s ease;
-	-moz-transition: All 0.3034s ease;
-	-o-transition: All 0.3034s ease;
-	transition: All 0.3034s ease; /* Future compatibility */
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	-o-transform: scale(1);
-	transform: scale(1); /* Future compatibility */
+.ppt > a:hover {
+	color:#000;
 }
-div#flickr_photos img:hover
-{
-	-webkit-transform: scale(1.15);
-	-moz-transform: scale(1.15);
-	-o-transform: scale(1.15);
-	transform: scale(1.15); /* Future compatibility */
-}
-
 /* CONTENT VIDEOS */
 div#vimeo_videos img
 {
