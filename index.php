@@ -118,7 +118,7 @@ $i = 0;
 		<div id="elements">
 			<ol>
 				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
-					The arrow is always lined up (few px off) no matter which modules are active -->
+					The arrow is always lined up (few px off) no matter which modules are active  -->
 				<li><a href="javascript:switchto('about', <? echo $i++; ?>);" id="nav_about">about</a></li>
 				<? if ($images) { ?><li><a href="javascript:switchto('photos', <? echo $i++; ?>);" id="nav_photos">photos</a></li><? } ?>
 				<? if ($videos) { ?><li><a href="javascript:switchto('videos', <? echo $i++; ?>);" id="nav_videos">videos</a></li><? } ?>
