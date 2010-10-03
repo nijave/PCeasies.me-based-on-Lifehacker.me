@@ -52,6 +52,7 @@ div#nav li
 	width:66px;
 	margin: 0 24px 0 24px;
 	font-family: 'HelveticaNeueCondensedBold';
+	text-align:center;
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
 	-o-transition: All 0.3034s ease;
