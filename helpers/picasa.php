@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
 	Helper to grab Picasa images
 	By:
 	- Nick - pceasies.com

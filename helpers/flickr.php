@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
 	Handmade Flickr helper. 
 	
 	By:
