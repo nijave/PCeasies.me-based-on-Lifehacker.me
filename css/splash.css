@@ -49,7 +49,7 @@ div#nav li
 {
 	list-style: none;
 	float: right;
-	width:66px;
+	width: 66px;
 	margin: 0 24px 0 24px;
 	font-family: 'HelveticaNeueCondensedBold';
 	text-align:center;
@@ -103,7 +103,7 @@ div#triangle
 	clear: right;
 	text-align: right;
 	padding: 0;
-	margin: 6px 54px 0 0;
+	margin: 4px 42px 0 0;
 	/* Handled by jQuery now
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
