@@ -62,6 +62,7 @@ $i = 0;
 	<script type="text/javascript" charset="utf-8">
 		var elementsArray = new Array();
 		var nav_items;
+		var i = 0;
 		$(document).ready(function(){
 			$("a[rel^='prettyPhoto']").prettyPhoto();
 			elementsArray = $('.content_bubble');
@@ -73,6 +74,10 @@ $i = 0;
 			};
 			document.getElementById("pictures").style.display = 'none';
 			$("a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:true});
+			$('#nav li').each(function() {
+				$(this).attr('title', i);
+				i++;
+			});
 		});
 		$(window).load(function() {
 		console.log('window loaded');
@@ -80,12 +85,18 @@ $i = 0;
 				$('#pictures').fadeIn(2000);
 			}).html('');
 		});
+		function switchto( elem ){
+			$(elementsArray).hide(1);
+			$('#'+elem).fadeIn('slow');
+			amount = (42 + (parseInt($('#nav_'+elem).attr('title'))*114));
+			console.log(amount);
+			$('#triangle').stop().animate({marginRight: amount}, 1000);
+			return false;
+		}
 	</script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 	<? } ?>
-	
-	<script type="text/javascript" src="js/switches.js"></script>
 	<script type="text/javascript">
 		//document.getElementById('nav').style = 'display: none;';
 	</script>
@@ -119,17 +130,18 @@ $i = 0;
 			<ol>
 				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
 					The arrow is always lined up (few px off) no matter which modules are active  -->
-				<li><a href="javascript:switchto('about', <? echo $i++; ?>);" id="nav_about">about</a></li>
-				<? if ($images) { ?><li><a href="javascript:switchto('photos', <? echo $i++; ?>);" id="nav_photos">photos</a></li><? } ?>
-				<? if ($videos) { ?><li><a href="javascript:switchto('videos', <? echo $i++; ?>);" id="nav_videos">videos</a></li><? } ?>
-				<? if ($twitter) { ?><li><a href="javascript:switchto('twitter', <? echo $i++; ?>);" id="nav_twitter">twitter</a></li><? } ?>
+				<li id="nav_about"><a href="?p=about" onclick="switchto('about'); return false;">about</a></li>
+				<? if ($images) { ?><li id="nav_photos"><a href="?p=images" onclick="switchto('photos'); return false;">photos</a></li><? } ?>
+				<? if ($videos) { ?><li id="nav_videos"><a href="?p=videos;" onclick="switchto('videos'); return false;">videos</a></li><? } ?>
+				<? if ($twitter) { ?><li id="nav_twitter"><a href="?p=twitter" onclick="switchto('twitter'); return false;">twitter</a></li><? } ?>
 			</ol>
-		</div>
+			<div id="triangle">
+				<img src="images/bubble_triangle_100.png" width="30" height="15" />
+			</div>
+		</div>	
 	</div>
 	
-	<div id="triangle">
-		<img src="images/bubble_triangle_100.png" width="30" height="15" />
-	</div>
+	
 	
 	<div id="about" class="content_bubble">
 		<h3>about</h3>
