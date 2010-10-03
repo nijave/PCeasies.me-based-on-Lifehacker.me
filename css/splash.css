@@ -152,6 +152,10 @@ div#about
 {
 	display: inline;
 }
+div#about a {
+	color: #0BB1E3;
+	text-decoration:underline;
+}
 div#photos
 {
 	display: none;
