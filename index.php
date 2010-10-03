@@ -78,9 +78,12 @@ $i = 0;
 				$(this).attr('title', i);
 				i++;
 			});
+			$('#nav li a').click(function() {
+				switchto( $(this).text() );	
+				return false;
+			});
 		});
 		$(window).load(function() {
-		console.log('window loaded');
 			$('#loading-pics').fadeOut('fast', function() {
 				$('#pictures').fadeIn(2000);
 			}).html('');
@@ -89,9 +92,7 @@ $i = 0;
 			$(elementsArray).hide(1);
 			$('#'+elem).fadeIn('slow');
 			amount = (42 + (parseInt($('#nav_'+elem).attr('title'))*114));
-			console.log(amount);
 			$('#triangle').stop().animate({marginRight: amount}, 1000);
-			return false;
 		}
 	</script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
@@ -130,10 +131,10 @@ $i = 0;
 			<ol>
 				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
 					The arrow is always lined up (few px off) no matter which modules are active  -->
-				<li id="nav_about"><a href="?p=about" onclick="switchto('about'); return false;">about</a></li>
-				<? if ($images) { ?><li id="nav_photos"><a href="?p=images" onclick="switchto('photos'); return false;">photos</a></li><? } ?>
-				<? if ($videos) { ?><li id="nav_videos"><a href="?p=videos;" onclick="switchto('videos'); return false;">videos</a></li><? } ?>
-				<? if ($twitter) { ?><li id="nav_twitter"><a href="?p=twitter" onclick="switchto('twitter'); return false;">twitter</a></li><? } ?>
+				<li id="nav_about"><a href="?p=about">about</a></li>
+				<? if ($images) { ?><li id="nav_photos"><a href="?p=photos">photos</a></li><? } ?>
+				<? if ($videos) { ?><li id="nav_videos"><a href="?p=videos">videos</a></li><? } ?>
+				<? if ($twitter) { ?><li id="nav_twitter"><a href="?p=twitter">twitter</a></li><? } ?>
 			</ol>
 			<div id="triangle">
 				<img src="images/bubble_triangle_100.png" width="30" height="15" />
