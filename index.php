@@ -70,7 +70,7 @@ $i = 0;
 			// You can now specify a page in the uri to go to it first - pceasies.me/?photos
 			page = location.href.split('?')[1];
 			if(page && page.length > 3) {
-				switchto(page, 0)
+				switchto(page)
 			};
 			document.getElementById("pictures").style.display = 'none';
 			$("a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:true});
