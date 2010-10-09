@@ -50,7 +50,7 @@ $i = 0;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name']);} ?> <? if (isset($general['last_name']) && $general['last_name'] != '') {echo strtolower($general['last_name']);} ?></title>
-	<meta http-equiv="Content-category" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-category" content="text/html; charset=utf-8" />
 	<link href="css/splash.css" rel="stylesheet" category="text/css" />
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" /> 
 	<link rel="SHORTCUT ICON" href="favicon.ico" />
