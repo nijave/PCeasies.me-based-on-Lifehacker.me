@@ -1,0 +1,16 @@
+PCEasies.me personal homepage
+
+Supports these services:
+Flickr
+Picasa
+Youtube
+Vimeo
+Twitter
+
+Installation/Usage:
+Modify conf/config.php
+
+Directly link to a page:
+website.com/?photos
+website.com/?videos
+-- Same as the name of the navigation item
