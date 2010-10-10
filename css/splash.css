@@ -103,7 +103,7 @@ div#triangle
 	clear: right;
 	text-align: right;
 	padding: 0;
-	margin: 4px 42px 0 0;
+	margin: 4px 42px -6px 0;
 	/* Handled by jQuery now
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
@@ -133,7 +133,7 @@ div#triangle
 {
 	font-weight: bold;
 	font-size: 36px;
-	margin: 2px 0 -10px 0;
+	margin: 2px 0 -4px 0;
 }
 .content_bubble a
 {
@@ -302,4 +302,8 @@ div#footer a
 div#footer a:hover
 {
 	text-decoration: underline;
+}
+
+img { /* fix for Firefox */
+	border:0;
 }
