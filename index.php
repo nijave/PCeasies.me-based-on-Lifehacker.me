@@ -239,7 +239,7 @@ $page = array_keys($_GET);
 					$attrs = $media->group->thumbnail[0]->attributes();
 					$thumbnail = $attrs['url'];
 					
-					echo '<a href="'.urlencode($video_url).'%26width%3D640" rel="prettyPhoto" title="'.$video_title.'"><img src="'.$thumbnail.'" width="120" height="90"></a>';
+					echo '<a href="'.$video_url.'%26width%3D640" rel="prettyPhoto" title="'.$video_title.'"><img src="'.$thumbnail.'" width="120" height="90"></a>';
 				}
 				?>
 			</div>
