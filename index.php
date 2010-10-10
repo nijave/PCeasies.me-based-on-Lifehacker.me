@@ -73,7 +73,8 @@ $page = array_keys($_GET);
 				switchto(page)
 			};
 			document.getElementById("pictures").style.display = 'none';
-			$("a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:true});
+			$("#photos a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:true});
+			$("#videos a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:false});
 			$('#nav li a').click(function() {
 				switchto( $(this).text() );	
 				return false;
