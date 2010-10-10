@@ -64,7 +64,6 @@ $page = array_keys($_GET);
 		var nav_items;
 		var i = 0;
 		$(document).ready(function(){
-			$("a[rel^='prettyPhoto']").prettyPhoto();
 			elementsArray = $('.content_bubble');
 			nav_items = $('#elements ol li').length;
 			// You can now specify a page in the uri to go to it first - pceasies.me/?photos
@@ -72,7 +71,7 @@ $page = array_keys($_GET);
 			if(page && page.length > 3) {
 				switchto(page)
 			};
-			document.getElementById("pictures").style.display = 'none';
+			$('#pictures').css('display', 'none');
 			$("#photos a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:true});
 			$("#videos a[rel^='prettyPhoto']").prettyPhoto({theme: 'light_rounded',slideshow:5000, autoplay_slideshow:false});
 			$('#nav li a').click(function() {
@@ -81,6 +80,7 @@ $page = array_keys($_GET);
 			});
 		});
 		$(window).load(function() {
+			// Waits until the pictures are fully loaded, then removes loader.gif and displays them.
 			$('#loading-pics').fadeOut('fast', function() {
 				$('#pictures').fadeIn(2000);
 			}).html('');
@@ -88,7 +88,9 @@ $page = array_keys($_GET);
 		function switchto( elem ){
 			$(elementsArray).hide(1);
 			$('#'+elem).fadeIn('slow');
-			amount = (42 + (parseInt($('li').index($('#nav_'+elem)))*114));
+			// This finds the index of the nav li relative to ol and uses that to determine where the slider should be moved to
+			// 42px is the base width to align to 'about' 114px is the amount of space to get to the next item
+			amount = (42 + (parseInt( $('li').index($('#nav_'+elem)) )*114));
 			$('#triangle').stop().animate({marginRight: amount}, 1000);
 		}
 	</script>
@@ -144,8 +146,6 @@ $page = array_keys($_GET);
 		</h1>
 		<div id="elements">
 			<ol>
-				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
-					The arrow is always lined up (few px off) no matter which modules are active  -->
 				<li id="nav_about"><a href="?about">about</a></li>
 				<? if ($images) { ?><li id="nav_photos"><a href="?photos">photos</a></li><? } ?>
 				<? if ($videos) { ?><li id="nav_videos"><a href="?videos">videos</a></li><? } ?>
