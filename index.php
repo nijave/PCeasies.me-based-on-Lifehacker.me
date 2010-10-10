@@ -233,7 +233,7 @@ $page = array_keys($_GET);
 					// Get the video URL...
 					$attrs = $media->group->player->attributes();
 					$video_url = $attrs['url'];
-					$video_url = preg_replace('/&/', '%26', $video_url);
+					$video_url = preg_replace( '/&/', '%26', $video_url );
 					$video_title = $media->group->title; 
 
 					// Get the video thumbnail...
