@@ -113,7 +113,28 @@ $page = array_keys($_GET);
 				} ?>
 			
 		}
+		<?
+		if(!isset($page[0])) {
+			echo '#about { display: inline; }';
+		}
+		?>
 	</style>
+	<noscript>
+		<style>
+			#<? if(isset($page[0])) {echo $page[0];}else{echo 'about';}?> {
+				display: inline;
+			}
+			#nav_<? if(isset($page[0])) {echo $page[0];}else{echo 'about';}?> {
+				border-bottom: 4px solid white;
+			}
+			div#triangle {
+				display:none;
+			}
+			.clear {
+				clear:both;
+			}
+		</style>
+	</noscript>
 </head>
 <body>
 	<div id="nav">
@@ -124,14 +145,15 @@ $page = array_keys($_GET);
 			<ol>
 				<!-- I added a simple PHP number increment which is used to determine the correct offset for the triangle arrow
 					The arrow is always lined up (few px off) no matter which modules are active  -->
-				<li id="nav_about"><a href="?p=about">about</a></li>
-				<? if ($images) { ?><li id="nav_photos"><a href="?p=photos">photos</a></li><? } ?>
-				<? if ($videos) { ?><li id="nav_videos"><a href="?p=videos">videos</a></li><? } ?>
-				<? if ($twitter) { ?><li id="nav_twitter"><a href="?p=twitter">twitter</a></li><? } ?>
+				<li id="nav_about"><a href="?about">about</a></li>
+				<? if ($images) { ?><li id="nav_photos"><a href="?photos">photos</a></li><? } ?>
+				<? if ($videos) { ?><li id="nav_videos"><a href="?videos">videos</a></li><? } ?>
+				<? if ($twitter) { ?><li id="nav_twitter"><a href="?twitter">twitter</a></li><? } ?>
 			</ol>
 			<div id="triangle">
 				<img src="images/bubble_triangle_100.png" width="30" height="15">
 			</div>
+			<div class="clear"></div>
 		</div>	
 	</div>
 	
