@@ -120,7 +120,7 @@ div#triangle
 	border: none;
 	opacity: 0.9;
 	font-family: 'HelveticaNeueRegular';
-	
+	display:none;
 	filter: alpha(opacity=90);
 	-moz-border-radius: 18px;
 	-webkit-border-radius: 18px;
@@ -156,21 +156,6 @@ div#about
 div#about a {
 	color: #0BB1E3;
 	text-decoration:underline;
-}
-div#photos
-{
-	display: none;
-}
-div#photos > h3 {
-	padding-bottom:10px;
-}
-div#videos
-{
-	display: none;
-}
-div#twitter
-{
-	display: none;
 }
 
 /* CONTENT PHOTOS */
