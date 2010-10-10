@@ -149,10 +149,6 @@ div#triangle
 }
 
 /* CONTENT DISPLAY */
-div#about
-{
-	display: inline;
-}
 div#about a {
 	color: #0BB1E3;
 	text-decoration:underline;
