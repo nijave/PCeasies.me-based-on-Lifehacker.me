@@ -43,23 +43,23 @@ if (isset($accounts['twitter']['username']) && $accounts['twitter']['username'] 
 
 /*** FACEBOOK ***/
 
-$i = 0;
+$page = array_keys($_GET);
+//echo $page[0];
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 	<title><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name']);} ?> <? if (isset($general['last_name']) && $general['last_name'] != '') {echo strtolower($general['last_name']);} ?></title>
-	<meta http-equiv="Content-category" content="text/html; charset=utf-8" />
-	<link href="css/splash.css" rel="stylesheet" category="text/css" />
-    <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" /> 
-	<link rel="SHORTCUT ICON" href="favicon.ico" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="css/splash.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"> 
+	<link rel="SHORTCUT ICON" href="favicon.ico">
 	<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
 	
 	<? if (isset($accounts['vimeo']['username']) || isset($accounts['youtube']['username']))
 	{
 	?>
-	<script type="text/javascript" charset="utf-8">
+	<script type="text/javascript">
 		var elementsArray = new Array();
 		var nav_items;
 		var i = 0;
@@ -92,11 +92,8 @@ $i = 0;
 		}
 	</script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+	<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css">
 	<? } ?>
-	<script type="text/javascript">
-		//document.getElementById('nav').style = 'display: none;';
-	</script>
 	<style>
 		body
 		{
@@ -112,7 +109,7 @@ $i = 0;
 				} ?>
 		
 			<? if(isset($visual_style['navigation_shadows']) && $visual_style['navigation_shadows'] != '') {
-				echo 'text-shadow:0px 0px 6px #666';
+				echo 'text-shadow:0px 0px 6px #666;';
 				} ?>
 			
 		}
@@ -133,7 +130,7 @@ $i = 0;
 				<? if ($twitter) { ?><li id="nav_twitter"><a href="?p=twitter">twitter</a></li><? } ?>
 			</ol>
 			<div id="triangle">
-				<img src="images/bubble_triangle_100.png" width="30" height="15" />
+				<img src="images/bubble_triangle_100.png" width="30" height="15">
 			</div>
 		</div>	
 	</div>
@@ -142,7 +139,7 @@ $i = 0;
 	
 	<div id="about" class="content_bubble">
 		<h3>about</h3>
-		<p><?=$general['about_me']; ?></p>
+		<?=$general['about_me']; ?>
 	</div>
 	
 	<? if ($images) { ?> <!-- Images true/false check added outside of div some the 'photos' line and an empty div won't show up when disabled -->
@@ -157,7 +154,7 @@ $i = 0;
 				$accounts['flickr']['username'] = getID($accounts['flickr']['username']); // This turns the username into an id if it isn't one
 				$flickr_images = getPhotos($accounts['flickr']['username'], 25);
 				foreach($flickr_images as $item) {
-					echo '<a href="'.$item['url'].'" rel="prettyPhoto[flickr]"><img src="'.$item['url'].'" class="image-thumb" name="'.$item['title'].'" alt="<a href=\''.$item['link'].'\'>'.$item['title'].'</a>"></a>';
+					echo '<a href="'.$item['url'].'" rel="prettyPhoto[flickr]"><img src="'.$item['url'].'" class="image-thumb" id="'.$item['title'].'" alt="<a href=\''.$item['link'].'\'>'.$item['title'].'</a>"></a>';
 				}
 			}
 			if($accounts['flickr']['username'] !== '' && $accounts['picasa']['username'] !== '') {
@@ -167,13 +164,13 @@ $i = 0;
 				require_once('helpers/picasa.php');
 				$picasa_images = getPicasaPhotos($accounts['picasa']['username'], 25);
 				foreach($picasa_images as $item) {
-					echo '<a href="'.$item['url'].'" rel="prettyPhoto[picasa]"><img src="'.$item['url'].'" class="image-thumb" name="'.$item['title'].'" alt="<a href=\''.$item['link'].'\'>'.$item['title'].'</a>"></a>';
+					echo '<a href="'.$item['url'].'" rel="prettyPhoto[picasa]"><img src="'.$item['url'].'" class="image-thumb" id="'.$item['title'].'" alt="<a href=\''.$item['link'].'\'>'.$item['title'].'</a>"></a>';
 				}
 			}
 		}
 		?>
 		</div>	
-		<p id="more">
+		<p class="more">
 		<?php
 			if($accounts['flickr']['username'] !== '') echo '<a href="http://flickr.com/photos/'.$accounts["flickr"]["username"].'">Flickr...</a><br>';
 			if($accounts['picasa']['username'] !== '') echo '<a href="http://picasaweb.google.com/'.$accounts["picasa"]["username"].'">Picasa...</a>';
@@ -192,12 +189,11 @@ $i = 0;
 			echo '<p>'.$general['about_videos'].'</p>';
 		}
 		?>
-		<p>
 			<? if ($accounts['vimeo']['username'] !== '') { ?>
 			<!-- Vimeo -->
 			<div id="vimeo_videos">
 				<?php foreach ($vimeo_videos->video as $video): ?>
-	            <a href="<?=$video->url ?>&width=640" rel="prettyPhoto" title="<?=$video->title ?>"><img src="<?=$video->thumbnail_small ?>" width="120" height="90" /></a>
+	            <a href="<?=$video->url ?>%26width%3D640" rel="prettyPhoto" title="<?=$video->title ?>"><img src="<?=$video->thumbnail_small ?>" width="120" height="90"></a>
 				<?php endforeach; ?>
 			</div>
 			<? } ?>
@@ -221,33 +217,29 @@ $i = 0;
 					$attrs = $media->group->thumbnail[0]->attributes();
 					$thumbnail = $attrs['url'];
 					
-					echo '<a href="'.$video_url.'&width=640" rel="prettyPhoto" title="'.$video_title.'"><img src="'.$thumbnail.'" width="120" height="90" /></a>';
+					echo '<a href="'.urlencode($video_url).'%26width%3D640" rel="prettyPhoto" title="'.$video_title.'"><img src="'.$thumbnail.'" width="120" height="90"></a>';
 				}
 				?>
 			</div>
 			<? } ?>
-		</p>
 		<? } ?>
 	</div>
 	
 	<div id="twitter" class="content_bubble">
 		<h3><? if (isset($general['first_name']) && $general['first_name'] != '') {echo strtolower($general['first_name'])."'s ";} ?>tweets</h3>
-
-		<p>
 			<div id ="twitter_feed">
 				<? if ($twitter) { ?>
 				<?
 				foreach ($twitter_simple_xml->status as $tweet)
 				{
-					echo '<p class="tweet"><img src="'.$tweet->user->profile_image_url.'" style="float: left; margin: 0 8px 8px 0;" height="60" width="60" />'.$tweet->text.'<br /><span style="font-size: 10px; font-style: italic;">'.$tweet->created_at.'</span></p><hr />';
+					echo '<p class="tweet"><img src="'.$tweet->user->profile_image_url.'" style="float: left; margin: 0 8px 8px 0;" height="60" width="60">'.$tweet->text.'<br><span style="font-size: 10px; font-style: italic;">'.$tweet->created_at.'</span></p><hr>';
 				}
 				?>
-				<p id="more">
+				<p class="more">
 					<a href="http://twitter.com/<?=$accounts['twitter']['username'] ?>">More...</a>
 				</p>
 				<? } ?>
 			</div>
-		</p>
 	</div>
 	
 	<div id="footer">
