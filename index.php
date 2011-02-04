@@ -86,8 +86,9 @@ $page = array_keys($_GET);
 			}).html('');
 		});
 		function switchto( elem ){
-			$(elementsArray).hide(1);
-			$('#'+elem).fadeIn('slow');
+			$(elementsArray).hide(0, function() {
+				$('#'+elem).fadeIn('slow');
+			});
 			// This finds the index of the nav li relative to ol and uses that to determine where the slider should be moved to
 			// 42px is the base width to align to 'about' 114px is the amount of space to get to the next item
 			amount = (42 + (parseInt( $('li').index($('#nav_'+elem)) )*114));
