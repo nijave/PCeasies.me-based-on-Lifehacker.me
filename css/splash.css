@@ -1,17 +1,20 @@
 /* ALL */
 
-@font-face
-{
-	font-family: 'HelveticaNeueRegular';
-	src: url('../fonts/HelveticaNeue.eot');
-	src: local('Helvetica Neue Bold'), local('HelveticaNeue'), url('../fonts/HelveticaNeue.woff') format('woff'), url('../fonts/HelveticaNeue.ttf') format('truetype');
+@font-face {
+	font-family: 'Luxi-Sans';
+	src: url('fonts/luxi-sans/luxisr-webfont.eot?'),
+	     url('fonts/luxi-sans/luxisr-webfont.woff') format('woff'), 
+		 url('fonts/luxi-sans/luxisr-webfont.ttf') format('truetype'),
+		 url('fonts/luxi-sans/luxisr-webfont.svg#webfontSfKTcYuD') format('svg');
 }
 
 @font-face
 {
-	font-family: 'HelveticaNeueCondensedBold';
-	src: url('../fonts/HelveticaNeue-CondensedBold.eot');
-	src: local('HelveticaNeue-CondensedBold'), local('HelveticaNeue-CondensedBold'), url('../fonts/HelveticaNeue-CondensedBold.woff') format('woff'), url('../fonts/HelveticaNeue-CondensedBold.ttf') format('truetype');
+	font-family: 'Luxi-Sans-Bold';
+	src: url('fonts/luxi-sans/luxisb-webfont.eot?'),
+	     url('fonts/luxi-sans/luxisb-webfont.woff') format('woff'), 
+		 url('fonts/luxi-sans/luxisb-webfont.ttf') format('truetype'),
+		 url('fonts/luxi-sans/luxisb-webfont.svg#webfontSfKTcYuD') format('svg');
 }
 
 body
@@ -22,24 +25,24 @@ body
 	background-attachment: fixed;
 	background-repeat: none;
 	background-position: left top;
-	font-family: 'HelveticaNeueRegular';
+	font-family: 'Luxi-Sans';
 }
 
 /* NAVIGATION */
 div#nav h1
 {
 	margin: 0px 24px -20px 0;
-	font-size: 92px;
+	font-size: 6.2em;
 }
 div#nav
 {
 	text-align: right;
-	font-size: 24px;
 	color: #FFFFFF;
 }
 div#nav #elements
 {
 	margin-right: 20px;
+	font-size: 1.4em;
 }
 div#nav ol {
 	height:12px;
@@ -51,7 +54,7 @@ div#nav li
 	float: right;
 	width: 66px;
 	margin: 0 24px 0 24px;
-	font-family: 'HelveticaNeueCondensedBold';
+	font-family: 'Luxi-Sans-Bold';
 	text-align:center;
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
@@ -103,7 +106,7 @@ div#triangle
 	clear: right;
 	text-align: right;
 	padding: 0;
-	margin: 4px 42px -6px 0;
+	margin: 0 42px -6px 0;
 	/* Handled by jQuery now
 	-webkit-transition: All 0.3034s ease;
 	-moz-transition: All 0.3034s ease;
@@ -119,27 +122,26 @@ div#triangle
 	padding: 32px 24px 21px 24px;
 	border: none;
 	opacity: 0.9;
-	font-family: 'HelveticaNeueRegular';
+	font-family: 'Luxi-Sans';
 	display:none;
 	filter: alpha(opacity=90);
 	-moz-border-radius: 18px;
 	-webkit-border-radius: 18px;
 	border-radius: 18px;
 	background: #fff;
-	
 	text-align: left;
 }
 .content_bubble h3
 {
 	font-weight: bold;
-	font-size: 36px;
+	font-size: 2.5em;
 	margin: 2px 0 -4px 0;
 }
 .content_bubble a
 {
 	color: #444;
 	text-decoration: none;
-	font-family: 'HelveticaNeueRegular';
+	font-family: 'Luxi-Sans';
 	font-weight: normal;
 }
 .content_bubble a:hover
@@ -272,7 +274,7 @@ div#footer
 	background: #000000;
 	background: -webkit-gradient(linear, 80% 20%, 80% 100%, from(#000000), to(#555555));
 	color: #FFFFFF;
-	font-size: 12px;
+	font-size: .8em;
 	font-weight: bold;
 }
 div#footer a
